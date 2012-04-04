@@ -62,15 +62,25 @@ Namespace::Dispatch - A dispatcher treating namespaces as a tree
 
 =head1 SYNOPSIS
 
+    # lib/Foo.pm
     package Foo;
     use Namespace::Dispatch;
 
+    1;
+
+    # lib/Foo/Bar.pm
     package Foo::Bar;
     use Namespace::Dispatch;
 
+    1;
+
+    # lib/Foo/Bar/Baz.pm
     package Foo::Bar::Baz;
     use Namespace::Dispatch;
 
+    1;
+
+    # any.pl
     package main;
     use Foo;
     Foo->dispatch(qw(bar baz)); #=> Foo::Bar::Baz
@@ -79,7 +89,7 @@ Namespace::Dispatch - A dispatcher treating namespaces as a tree
 
 Namespace::Dispatch is designed for the purpose that tasks are broke into a set of relevant, hierarchical modules.
 Implicit dispatching ability was attached into these modules when they are declared as members of this set.
-Any node in this hierarchy can serve the dispatching request in recursive manner.
+Any node in this hierarchy can serve the dispatching requests in recursive manner.
 
 =head1 AUTHOR
 

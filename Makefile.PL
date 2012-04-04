@@ -2,7 +2,7 @@ use inc::Module::Install;
 
 name          'Namespace-Dispatch';
 all_from      'lib/Namespace/Dispatch.pm';
-author        'shelling <navyblueshellingford@gmai.com>';
+author        'shelling <navyblueshellingford@gmail.com>';
 license       'MIT';
 perl_version  '5.010';
 
