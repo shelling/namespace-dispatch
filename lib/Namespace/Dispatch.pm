@@ -58,15 +58,28 @@ __END__
 
 =head1 NAME
 
-Namespace::Dispatch -
+Namespace::Dispatch - A dispatcher treating namespaces as a tree
 
 =head1 SYNOPSIS
 
-  use Namespace::Dispatch;
+    package Foo;
+    use Namespace::Dispatch;
+
+    package Foo::Bar;
+    use Namespace::Dispatch;
+
+    package Foo::Bar::Baz;
+    use Namespace::Dispatch;
+
+    package main;
+    use Foo;
+    Foo->dispatch(qw(bar baz)); #=> Foo::Bar::Baz
 
 =head1 DESCRIPTION
 
-Namespace::Dispatch is
+Namespace::Dispatch is designed for the purpose that tasks are broke into a set of relevant, hierarchical modules.
+Implicit dispatching ability was attached into these modules when they are declared as members of this set.
+Any node in this hierarchy can serve the dispatching request in recursive manner.
 
 =head1 AUTHOR
 
@@ -76,7 +89,6 @@ shelling E<lt>navyblueshellingford@gmail.comE<gt>
 
 =head1 LICENSE
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+The MIT License
 
 =cut
