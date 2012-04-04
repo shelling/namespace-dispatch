@@ -6,7 +6,5 @@ perl:
 before_install: 
   - "cpanm --notest Module::Install"
   - "cpanm --notest Module::Install::AuthorTests"
-  - "cpanm --notest Try::Tiny"
-  - "cpanm --notest Modern::Perl"
 install:
   - "cpanm --notest --installdeps ."
