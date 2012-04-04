@@ -10,7 +10,6 @@ perl_version  '5.010';
 requires      'UNIVERSAL::filename';
 
 tests         't/*.t';
-author_tests  'xt';
 
 test_requires 'Test::More';
 
