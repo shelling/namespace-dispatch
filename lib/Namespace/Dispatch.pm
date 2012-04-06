@@ -80,10 +80,19 @@ Namespace::Dispatch - A dispatcher treating namespaces as a tree
 
     1;
 
+    # lib/Foo/Bar/Baz/Next.pm
+    package Foo::Bar::Baz::Next;
+    use Namespace::Dispatch;
+
+    1;
+
     # any.pl
     package main;
     use Foo;
-    Foo->dispatch(qw(bar baz)); #=> Foo::Bar::Baz
+    Foo->dispatch(qw(bar baz));            #=> Foo::Bar::Baz
+    Foo->dispatch(qw(bar baz next));       #=> Foo::Bar::Baz::Next
+    Foo::Bar->dispatch(qw(bar baz next));  #=> Foo::Bar::Baz::Next
+    Foo->dispatch(qw(hello world));        #=> Foo
 
 =head1 DESCRIPTION
 
