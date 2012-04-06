@@ -1,4 +1,8 @@
 Revision history for Perl extension Namespace::Dispatch
 
+0.02    Sat Apr  6 00:25:32 2012
+        - more documents
+        - add Modern::Perl and Try::Tiny as test requires
+
 0.01    Tue Apr  3 16:01:35 2012
         - original version
