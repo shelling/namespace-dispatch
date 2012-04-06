@@ -1,7 +1,7 @@
 package Namespace::Dispatch;
 our $VERSION = '0.01';
 
-use 5.010;
+use Modern::Perl;
 use UNIVERSAL::filename;
 
 sub import {
@@ -88,14 +88,17 @@ Namespace::Dispatch - A dispatcher treating namespaces as a tree
 =head1 DESCRIPTION
 
 Namespace::Dispatch is designed for the purpose that tasks are broke into a set of relevant, hierarchical modules.
-Implicit dispatching ability was attached into these modules when they are declared as members of this set.
-Any node in this hierarchy can serve the dispatching requests in recursive manner.
+Implicit dispatching ability was attached into these modules when they are declared as members of this set.  Any node in
+this hierarchy can serve the dispatching requests in recursive manner. That is, Any tree-like routing system can adopt
+the abstraction under the hood with its own invoking mechanism.
 
 =head1 AUTHOR
 
 shelling E<lt>navyblueshellingford@gmail.comE<gt>
 
 =head1 SEE ALSO
+
+L<App::LDAP>
 
 =head1 LICENSE
 
