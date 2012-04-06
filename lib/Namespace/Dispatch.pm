@@ -1,7 +1,7 @@
 package Namespace::Dispatch;
 our $VERSION = '0.01';
 
-use Modern::Perl;
+use 5.010;
 use UNIVERSAL::filename;
 
 sub import {
