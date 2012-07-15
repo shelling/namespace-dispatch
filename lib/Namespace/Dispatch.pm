@@ -1,5 +1,5 @@
 package Namespace::Dispatch;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use 5.010;
 use UNIVERSAL::filename;
@@ -7,51 +7,56 @@ use UNIVERSAL::filename;
 sub import {
     my $caller = caller;
 
-    *{$caller . "::" . "has_leaf"} = sub {
-        my ($class, $name) = @_;
-        my @leaves = @{$class->leaves} if $class->can("leaves");
-        if ( $name ~~ @leaves ) {
-            return $class . "::" . ucfirst($name);
-        } else {
-            return 0;
-        }
-    };
+    *{$caller . "::" . "has_leaf"} = *{has_leaf};
 
-    *{$caller . "::" . "dispatch"} = sub {
+    *{$caller . "::" . "dispatch"} = *{dispatch};
 
-        my $class   = shift;
-        my $next    = shift;
-        my $handler = $class->has_leaf($next);
-
-        if ($handler) {
-
-            eval qq{ use $handler };
-            die $@ if $@;
-
-            if ($handler->can("dispatch")) {
-                return $handler->dispatch(@_);
-            } else {
-                die "$handler is not set up yet (forgot to use Namespace::Dispatch?)";
-            }
-
-        } else {
-            return $class;
-        }
-
-    };
-
-    *{$caller . '::' . 'leaves'} = sub {
-        my $class = shift;
-        my $file = $class->filename;
-        $file =~ s{.pm$}{}g;
-        use File::Basename;
-        my @submodules = map { $_ = lc basename($_) } glob "$file/*.pm";
-        map { $_ =~ s{\.pm$}{}; } @submodules;
-        [@submodules];
-    };
+    *{$caller . '::' . 'leaves'} = *{leaves};
 
 }
 
+sub has_leaf {
+    my ($class, $name) = @_;
+    my @leaves = @{$class->leaves} if $class->can("leaves");
+    if ( $name ~~ @leaves ) {
+        return $class . "::" . ucfirst($name);
+    } else {
+        return 0;
+    }
+}
+
+sub dispatch {
+
+    my $class   = shift;
+    my $next    = shift;
+    my $handler = $class->has_leaf($next);
+
+    if ($handler) {
+
+        eval qq{ use $handler };
+        die $@ if $@;
+
+        if ($handler->can("dispatch")) {
+            return $handler->dispatch(@_);
+        } else {
+            die "$handler is not set up yet (forgot to use Namespace::Dispatch?)";
+        }
+
+    } else {
+        return $class;
+    }
+
+}
+
+sub leaves {
+    my $class = shift;
+    my $file = $class->filename;
+    $file =~ s{.pm$}{}g;
+    use File::Basename;
+    my @submodules = map { $_ = lc basename($_) } glob "$file/*.pm";
+    map { $_ =~ s{\.pm$}{}; } @submodules;
+    [@submodules];
+}
 
 1;
 __END__
