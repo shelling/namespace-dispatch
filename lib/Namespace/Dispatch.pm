@@ -5,11 +5,22 @@ use 5.010;
 use UNIVERSAL::filename;
 
 sub import {
+    my $pkg    = shift;
     my $caller = caller;
+    my $meta   = ref($caller->meta) if $caller->can("meta");
 
-    for (qw(has_leaf dispatch leaves)) {
-        *{"$caller::$_"} = *{$_};
+    if ( $meta && $meta =~ m/(Class$|Role$)/ ) {
+        eval qq{
+            package $pkg;
+            use Moose::Role;
+        };
+        Moose::Util::apply_all_roles($caller, $pkg, {-excludes => "import"});
+    } else {
+        for (qw(has_leaf dispatch leaves)) {
+            *{$caller . "::" . $_} = *{$_};
+        }
     }
+
 }
 
 sub has_leaf {

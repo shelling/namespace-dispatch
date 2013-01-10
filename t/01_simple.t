@@ -10,7 +10,7 @@ use Foo;
 
 is_deeply (
     Foo->leaves,
-    [qw(add del help modify)],
+    [qw(add class classwithrole del help modify role)],
     "Foo has two submodules Add and Del",
 );
 
