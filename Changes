@@ -1,5 +1,8 @@
 Revision history for Perl extension Namespace::Dispatch
 
+0.05    Thu Jan 10 18:18:39 CST 2013
+        - support Class and Role in Moose
+
 0.04    Sun Jul 15 15:34.21 2012
         - move subroutines out of import()
 
