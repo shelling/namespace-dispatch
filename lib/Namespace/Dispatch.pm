@@ -7,12 +7,9 @@ use UNIVERSAL::filename;
 sub import {
     my $caller = caller;
 
-    *{$caller . "::" . "has_leaf"} = *{has_leaf};
-
-    *{$caller . "::" . "dispatch"} = *{dispatch};
-
-    *{$caller . '::' . 'leaves'} = *{leaves};
-
+    for (qw(has_leaf dispatch leaves)) {
+        *{"$caller::$_"} = *{$_};
+    }
 }
 
 sub has_leaf {
