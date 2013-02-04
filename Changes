@@ -1,5 +1,8 @@
 Revision history for Perl extension Namespace::Dispatch
 
+0.07    Mon Feb  4 17:10:48 CST 2013
+        - Namespace::Dispatch::* are class methods and instance methods as well
+
 0.06    Mon Feb  4 14:11:45 CST 2013
         - skip tests to be a Moose::Role if Moose is not installed
 

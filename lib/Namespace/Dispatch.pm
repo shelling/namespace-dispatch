@@ -1,5 +1,5 @@
 package Namespace::Dispatch;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use 5.010;
 use UNIVERSAL::filename;
