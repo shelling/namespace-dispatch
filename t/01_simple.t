@@ -11,13 +11,25 @@ use Foo;
 is_deeply (
     Foo->leaves,
     [qw(add class classwithrole del help modify role)],
-    "Foo has two submodules Add and Del",
+    "Foo can return its submodules",
+);
+
+is_deeply (
+    Foo->new->leaves,
+    [qw(add class classwithrole del help modify role)],,
+    "the instance of Foo can return its submodules",
 );
 
 is (
     Foo->dispatch(qw(add)),
     "Foo::Add",
     "request Foo to find submodule Add and return Namespace",
+);
+
+is (
+    Foo->new->dispatch(qw(add)),
+    "Foo::Add",
+    "request the instance of Foo to find submodule Add and return Namespace",
 );
 
 is (
@@ -42,6 +54,12 @@ is (
     Foo::Add->has_leaf("user"),
     "Foo::Add::User",
     "",
+);
+
+is (
+    Foo->new->has_leaf("add"),
+    "Foo::Add",
+    ""
 );
 
 is (
