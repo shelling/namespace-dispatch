@@ -1,5 +1,8 @@
 Revision history for Perl extension Namespace::Dispatch
 
+0.06    Mon Feb  4 14:11:45 CST 2013
+        - skip tests to be a Moose::Role if Moose is not installed
+
 0.05    Thu Jan 10 18:18:39 CST 2013
         - support Class and Role in Moose
 
